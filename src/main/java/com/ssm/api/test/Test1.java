@@ -3,11 +3,11 @@ package com.ssm.api.test;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.lang.math.Fraction;
 import org.junit.Test;
-
-import com.alibaba.fastjson.JSONArray;
 
 
 public class Test1 {
@@ -33,7 +33,13 @@ public class Test1 {
 //		 s4();
 //		 s3();
 //		 s6();
-		 ss4();
+//		 ss4();
+//		 s7();
+		/* Date date = new Date();
+		 date.setTime(date.getTime() + 60*60*1000l);
+		 s8(new Date(),date );
+		 System.out.println(date);*/
+		 s9();
 	 }  
 	 @Test
 	 public static void ss4(){
@@ -158,5 +164,59 @@ public class Test1 {
 				Date date = new Date();
 				System.out.println(now);
 	 	}
+	 	public static String getBeforeByHourTime(int ihour){ 
+	 	     String returnstr = ""; 
+	 	     Calendar calendar = Calendar.getInstance(); 
+	 	     calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - ihour); 
+	 	     SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss"); 
+	 	     returnstr = df.format(calendar.getTime()); 
+	 	     return returnstr; 
+	 	  } 
+	 	public static void s7(){
+	 		Date dates = new Date();
+	 		dates.setTime(dates.getTime()-70*60*1000);
+	 		System.out.println(dates);
+	 		
+	 		String currentDate = "2017-12-04 14:08:20";
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			try {
+				Date date = df.parse(currentDate);// 解析成日期格式
+				System.out.println("+++++"+df.format(date));
+				date.setTime(date.getTime() - 4 * 60 * 1000);// 减去4分钟以后的时间
+				System.out.println(df.format(date));// 再将该时间转换成字符串格式
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+	 	}
+	 	/**
+	 	 * 判断两个时间的大小
+	 	 * @param millionSeconds
+	 	 * @return
+	 	 */
+	 	public static int s8(Date d1,Date d2){
+            if (d1.getTime() > d2.getTime()) {
+                System.out.println("dt1 在dt2前");
+                return 1;
+            } else if (d1.getTime() < d2.getTime()) {
+                System.out.println("dt1在dt2后");
+                return -1;
+            } else {//相等
+                return 0;
+            }
+	 	}
 	 	
+	 	public static void s9(){
+	 		String ss="2017-12-04 20:30:00";
+	 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	 		Date format=null;
+			try {
+				format = sdf.parse(ss);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	 		System.out.println(format);
+	 		String formats = new SimpleDateFormat("HH:mm ").format(format);
+	 		System.out.println(formats);
+	 	}
 }

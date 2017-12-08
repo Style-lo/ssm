@@ -10,11 +10,12 @@ public class OneMinTask implements InitializingBean{
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("黄金分割线--------------------------------------------------");
 	}
 	int i = 0;
-	
-	@Scheduled(fixedDelay = 3 * 1000)
+	/**
+	 * 半小时执行一次
+	 */
+	@Scheduled(fixedDelay = 30 * 60 * 1000)
 	public void task(){
 		i++;
 		System.out.println("第——"+i+"——次执行");

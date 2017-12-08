@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,8 +31,15 @@ public class ImgUploadController {
 		
 		String fileName = file.getOriginalFilename();
 		System.out.println("fileName>>"+fileName); 
+		String substring = fileName.substring(0, fileName.length()-4);
+		int ss = (int)(Math.random()*50+51);
+		String chars = "abcdefghijklmnopqrstuvwxyz";
+		char charAt = chars.charAt((int)(Math.random() * 26));
+		char charAt2 = chars.charAt((int)(Math.random() * 26));
+		String fileNames =substring+charAt+charAt2+ss+".jpg";
+		System.out.println("fileNames>>"+fileNames); 
 		
-		File dir = new File(path, fileName);
+		File dir = new File(path, fileNames);
 		if(!dir.exists()){  
             dir.mkdirs();  
         }  

@@ -28,9 +28,22 @@ public class TestJson {
 			char charAt = chars.charAt((int)(Math.random() * 26));
 			char charAt2 = chars.charAt((int)(Math.random() * 26));
 		}*/
-		s1();
+//		s1();
+		s2();
 	}
-	
+	public static void s3(){
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("ss", true);
+		if (jsonObject.getBoolean("ss")) {
+			
+		}
+	}
+	public static void s2(){
+		String ss = "789622.0";
+		int s1 =2;
+		System.out.println(Integer.valueOf(s1));
+		System.out.println(Integer.valueOf(ss));
+	}
 	public static void s1(){
 		int [] s = {3,5,1,9,6,4,7};
 		for (int i = 0; i < s.length-1; i++) {

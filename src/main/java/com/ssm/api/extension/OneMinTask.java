@@ -21,4 +21,10 @@ public class OneMinTask implements InitializingBean{
 		System.out.println("第——"+i+"——次执行");
 		
 	}
+	//	http://blog.csdn.net/sd4000784/article/details/7745947
+	@Scheduled(cron = "0 0 0 * * ?")
+	public void task1(){
+		System.out.println("每天0:0:0分执行，可参考上面URL");
+		
+	}
 }

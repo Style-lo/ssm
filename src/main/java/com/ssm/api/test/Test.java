@@ -10,7 +10,7 @@ public class Test {
 	/**
 	 * if(true) 不加大括号
 	 */
-	@org.junit.Test
+//	@org.junit.Test
 	public  void test4(){
 		int ss=4;
 		int forum_free=0;
@@ -21,7 +21,7 @@ public class Test {
 	/**
 	 * 字符串转时间戳
 	 */
-	@org.junit.Test
+//	@org.junit.Test
 	public void test5(){
 		 String string = "2014-3-17 08:20";
 	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -38,7 +38,7 @@ public class Test {
 	/**
 	 * 对象赋值是把该对象的引用指向另一个对象
 	 */
-	@org.junit.Test
+//	@org.junit.Test
 	public void test(){
 		int a[] = {100,200,300};
 		int b[] = {11,12,13,14,15,16};
@@ -55,7 +55,7 @@ public class Test {
 		System.out.println(b.length);
 	}
 	
-	@org.junit.Test
+//	@org.junit.Test
 	public void test1(){
 		String a = new String("试试");
 		String b = new String("试阿打算多试");
@@ -68,7 +68,7 @@ public class Test {
 	/**
 	 * 获取当前时间后一天的时间戳
 	 */
-	@org.junit.Test
+//	@org.junit.Test
 	public void test2(){
 		Calendar now=Calendar.getInstance();
 		now.add(Calendar.MINUTE,60*24);
@@ -79,7 +79,7 @@ public class Test {
 	/**
 	 * 获取当前时间后一小时的时间（字符串格式）
 	 */
-	@org.junit.Test
+//	@org.junit.Test
 	public void test3(){
 		Calendar now=Calendar.getInstance();
 		  now.add(Calendar.MINUTE,60);

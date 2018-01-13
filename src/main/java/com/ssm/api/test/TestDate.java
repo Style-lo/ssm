@@ -1,15 +1,14 @@
 package com.ssm.api.test;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.junit.Test;
-
 public class TestDate {
-
-	@Test
+	public static SimpleDateFormat date2Format = new SimpleDateFormat("yyyy-MM-dd");
+//	@Test
 	public void s1(){
 		int s =1513576938;
 		if (s < new Date().getTime()/1000) {
@@ -22,7 +21,7 @@ public class TestDate {
 	/**
 	 * 判断一个时间是否是当天
 	 */
-	@Test
+//	@Test
 	public void s2(){
 		SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -66,7 +65,7 @@ public class TestDate {
 		System.out.println(currentTime);
 		System.out.println("11:"+currentTime2);
 	}*/
-	@Test
+//	@Test
 	public void s3(){
 		String date = "2017-11-20 20:30";
 		SimpleDateFormat sldf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
@@ -91,7 +90,7 @@ public class TestDate {
 		System.out.println(time);
 		System.out.println(time2);
 	}
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		String ss = "2017-11-05 23:00";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		Date parse=null;
@@ -102,5 +101,89 @@ public class TestDate {
 			e.printStackTrace();
 		}
 		s4(parse, 21 ,0,0);
-	}
+//		night();
+		//获取当前时间，到毫秒
+//		System.out.println(new Timestamp(System.currentTimeMillis()));
+		String beforDayTime = getBeforDayTime(new Date(),-3);
+		System.out.println(beforDayTime);
+	}*/
+
+	    /**
+	     * 夜间服务费
+	     * 21:00-00:00 2元
+	     * 00:00-02:00 3元
+	     * 02:00-06:00 5元
+	     */
+	    public static int night(){
+	    	SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
+	    	String format = dateFormat.format(new Date());
+	    	System.out.println(format);
+	        int value = Integer.valueOf(dateFormat.format(new Date()));
+	        System.out.println(value);
+	        if(value == 0 || value >= 2100){
+	            return 2;
+	        } else if(value <= 200){
+	            return 3;
+	        } else if(value <= 600){
+	            return 5;
+	        }
+
+	        return 0;
+	    }
+	    /**
+	     * 获取指定时间的前后时间
+	     * @param date	指定时间
+	     * @param day	指定时间前多少天（-1为昨天）
+	     * @return
+	     */
+	    public static String getBeforDayTime(Date date, int day) {
+	    	SimpleDateFormat date2Format = new SimpleDateFormat("yyyy-MM-dd");
+	        Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(date);
+	        calendar.add(Calendar.DATE, day);
+	        calendar.set(Calendar.HOUR_OF_DAY, 0);
+	        calendar.set(Calendar.MINUTE, 0);
+	        calendar.set(Calendar.SECOND, 0);
+	        return date2Format.format(calendar.getTime());
+	    }
+	    
+	    
+	    /**
+	     * 获取当月开始时间
+	     * @return
+	     */
+	    public static String getMonthFirstDay(Date date) {
+	        Calendar calendar = Calendar.getInstance();
+	        if(date != null) {
+	        	calendar.setTime(date);
+	        }
+	        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+	        return date2Format.format(calendar.getTime());
+	    }
+	    /**
+	     * 获取当月开始时间
+	     * @return
+	     */
+	    public static String getMonthLastDay(Date date) {
+	    	Calendar calendar = Calendar.getInstance();
+	    	if(date != null) {
+	    		calendar.setTime(date);
+	    	}
+	    	calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+	    	return date2Format.format(calendar.getTime());
+	    }
+	    
+	    public static void s7(){
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, -1);
+			System.out.println(calendar.get(Calendar.MONTH)+"----888888----");
+			System.out.println((calendar.get(Calendar.MONTH) + 1));
+			System.out.println(calendar.get(Calendar.YEAR)+"===========");
+			System.out.println(calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1));
+			System.out.println(getMonthFirstDay(calendar.getTime())+"*********************");
+			System.out.println(calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		}
+	    public static void main(String[] args) {
+	    	s7();
+		}
 }

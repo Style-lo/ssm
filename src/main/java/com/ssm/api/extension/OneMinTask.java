@@ -4,9 +4,11 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-@Component
 public class OneMinTask implements InitializingBean{
 
+	/**
+	 * 在配置文件中将OneMinTask对象交给Spring管理，所以写了条<bean class="com.ssm.api.extension.OneMinTask" />
+	 */
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
@@ -15,7 +17,7 @@ public class OneMinTask implements InitializingBean{
 	/**
 	 * 半小时执行一次
 	 */
-	@Scheduled(fixedDelay = 30 * 60 * 1000)
+	@Scheduled(fixedDelay = 3* 1000)
 	public void task(){
 		i++;
 		System.out.println("第——"+i+"——次执行");

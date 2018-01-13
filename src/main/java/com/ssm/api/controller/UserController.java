@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssm.api.bean.entity.UserLog;
+import com.ssm.api.bean.entity.UserMoney;
 import com.ssm.api.bean.request.User;
 import com.ssm.api.bean.response.Order;
 import com.ssm.api.service.OrderService;
@@ -34,8 +36,17 @@ public class UserController {
 	@RequestMapping(value="getUserId",method={(RequestMethod.GET),(RequestMethod.POST)})
 	public Object getUserId(@RequestParam Integer id){
 		User userId = userService.getUserId(id);
+		System.out.println(userId.isBool()+"==========");
 		System.out.println(userId.getUser_name());
 		return userId.getUser_name();
+		
+	}
+	
+	@RequestMapping(value="insertUser")
+	public String insertUser(User user,UserLog userLog, UserMoney userMoney){
+			userService.insertUser(user, userLog, userMoney);
+		
+		return null;
 		
 	}
 	

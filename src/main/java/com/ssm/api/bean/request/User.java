@@ -1,21 +1,33 @@
 package com.ssm.api.bean.request;
 
-public class User {
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name = "user")
+public class User {
+	@Id
 	private int id;
 	private String user_name;
 	private String password;
 	private int age;
-	public User(int id, String user_name, String password, int age) {
+	private boolean bool;
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public User(int id, String user_name, String password, int age, boolean bool) {
 		super();
 		this.id = id;
 		this.user_name = user_name;
 		this.password = password;
 		this.age = age;
+		this.bool = bool;
 	}
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	public boolean isBool() {
+		return bool;
+	}
+	public void setBool(boolean bool) {
+		this.bool = bool;
 	}
 	public int getId() {
 		return id;

@@ -7,4 +7,17 @@
 	<select id="getUser" resultType="com.ssm.api.bean.request.User">
 		select * from user
 	</select>
+	
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="order_id" parameterType="com.ssm.api.bean.request.User">
+		insert into user (user_name, password, age) values (#{user_name}, #{password}, #{age})
+	</insert>
+	
+	<insert id="insertUserMoney">
+		insert into user_money (user_id, money, pay) values (#{user_id}, #{money}, #{pay})
+	</insert>
+	
+	<insert id="insertUseLog">
+		insert into user (user_id, date, msg) values (#{user_id}, #{date}, #{msg})
+	</insert>
+	
 </mapper>

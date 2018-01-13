@@ -6,9 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.lang.math.Fraction;
-import org.junit.Test;
-
 
 public class Test1 {
 
@@ -41,14 +38,14 @@ public class Test1 {
 		 System.out.println(date);*/
 		 s9();
 	 }  
-	 @Test
+	 //@Test
 	 public static void ss4(){
 		 Date now = new Date();
 			now.setTime(new Date().getTime()+ 30*60*1000);
 				Date date = new Date();
 				System.out.println(now);
 	 }
-	 @Test
+	 //@Test
 	 public void ss() throws ParseException{
 		 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		 java.util.Date now = df.parse("2004-03-26 13:31:40");
@@ -76,7 +73,7 @@ public class Test1 {
 	 }
 	 
 
-	 	@Test
+	 	//@Test
 		 public  void s3() throws ParseException{
 		     Date date = new Date();
 		     long t2 = 1510904400l*1000;

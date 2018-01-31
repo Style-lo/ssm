@@ -3,8 +3,7 @@ package com.ssm.api.serviceImpl;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserService {
 			userDao.insertUseLog(userLog);
 			userDao.insertUserMoney(userMoney);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException();
 		}
 		
 		return 0;

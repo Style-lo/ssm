@@ -12,7 +12,7 @@ public class OneTask {
     <task:scheduler id="qbScheduler" pool-size="10"/> 
 	 */
 	int i=0;
-	@Scheduled(fixedDelay = 3 * 1000)
+	@Scheduled(fixedDelay = 3 * 60 * 1000)
     public void auditSalary() {
 		i++;
     	System.out.println("注解方式自动执行----"+i);

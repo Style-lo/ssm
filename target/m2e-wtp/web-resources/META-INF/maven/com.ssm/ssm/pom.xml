@@ -39,6 +39,8 @@
             <!-- 表示开发的时候引入，发布的时候不会加载此包 -->  
             <scope>test</scope>  
         </dependency>  
+        <!-- https://mvnrepository.com/artifact/javax.transaction/javax.transaction-api -->
+        
         <!-- spring核心包 -->  
         <dependency>  
             <groupId>org.springframework</groupId>  
@@ -114,7 +116,11 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.38</version>
 		</dependency>
-        
+        <dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.8.5.RELEASE</version>
+		</dependency>
         <!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->  
         <dependency>  
             <groupId>commons-dbcp</groupId>  

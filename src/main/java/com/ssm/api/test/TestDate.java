@@ -183,7 +183,31 @@ public class TestDate {
 			System.out.println(getMonthFirstDay(calendar.getTime())+"*********************");
 			System.out.println(calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		}
+	    
+	    public static int nightFee(Date date){
+	    	SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
+	    	SimpleDateFormat ddd = new SimpleDateFormat("HHmm");
+	    	String format = ddd.format(1516745265000l);
+	    	Date parse = null;
+	    	try {
+				 parse = ddd.parse(format);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        int value = Integer.valueOf(dateFormat.format(parse));
+	        if(value == 0 || value >= 2100){
+	            return 2;
+	        } else if(value <= 200){
+	            return 3;
+	        } else if(value <= 600){
+	            return 5;
+	        }
+	        return 0;
+	    }
 	    public static void main(String[] args) {
-	    	s7();
+//	    	s7();
+	    	System.out.println(nightFee(new Date()));
+//	    	System.out.println(night());
 		}
 }

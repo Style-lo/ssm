@@ -17,7 +17,7 @@ public class OneMinTask implements InitializingBean{
 	/**
 	 * 半小时执行一次
 	 */
-	@Scheduled(fixedDelay = 3 * 60 * 1000)
+	@Scheduled(fixedDelay =30 * 60 * 1000)
 	public void task(){
 		i++;
 		System.out.println("第——"+i+"——次执行");

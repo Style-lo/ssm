@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssm.api.dao.UserDao" >
+<!-- <resultMap id="user" type="com.ssm.api.bean.request.User">
+    <id column="id" property="id"/>
+    <id column="user_name" property="user_name"/>
+    <id column="password" property="password"/>
+    <id column="age" property="age"/>
+    <id column="bool" property="bool"/>
+    </resultMap> -->
+    
 	<select id="getUserId" resultType="com.ssm.api.bean.request.User">
 		select * from user where id=#{id}
 	</select>
@@ -20,4 +28,7 @@
 		insert into user (user_id, date, msg) values (#{user_id}, #{date}, #{msg})
 	</insert>
 	
+	<select id="userLogin" resultType="com.ssm.api.bean.request.User">
+		select * from user where user_name = #{user_name} and password = #{password}
+	</select>
 </mapper>

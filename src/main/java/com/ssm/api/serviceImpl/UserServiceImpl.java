@@ -57,6 +57,11 @@ public class UserServiceImpl implements UserService {
 		return 0;
 	}*/
 
+	@Override
+	public User userLogin(User user) {
+		return userDao.userLogin(user);
+	}
+
 	
 
 }

@@ -14,7 +14,7 @@
 	
 	
 	<form action="${pageContext.request.contextPath}/user/getUserId">
-		<input type="text" name="name" />
+		<input type="text" name="id" />
 		<button>提交</button>
 	</form>
 </body>

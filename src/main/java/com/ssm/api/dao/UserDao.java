@@ -17,4 +17,6 @@ public interface UserDao {
 	int insertUser(User user);
 	int insertUserMoney(UserMoney userMoney);
 	int insertUseLog(UserLog userLog);
+	
+	User userLogin(User user);
 }

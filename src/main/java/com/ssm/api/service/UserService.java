@@ -14,4 +14,5 @@ public interface UserService {
 	
 	int insertUser(User user, UserLog userLog, UserMoney userMoney);
 
+	User userLogin(User user);
 }

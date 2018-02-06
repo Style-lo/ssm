@@ -21,15 +21,9 @@ login.testUpload = function(){
 	console.log(obj);
 	var url="http://localhost:8090/ssm/userlogin";
 	
-	/* commonJs.openAjax(url,obj,function(date){
-		if(date == null || date.equas("")){
-			("#spenId").innerText = "账号或密码错误，请重新输入！";
-		}
-	},function(data){
-		console.log("请求失败！");
-	}); */
     $.ajax({
-		url:"${pageContext.request.contextPath}/userlogin",
+		/* url:"${pageContext.request.contextPath}/userlogin", */
+		 url:url, 
 		type:"POST",
 		dataType:"json", 
 		data:{"jsonParams" : JSON.stringify(obj)},
@@ -50,7 +44,7 @@ $(document).ready(function(){
 		
 </script>
 <body>
-	<form id="from2" action="${pageContext.request.contextPath}/api/v1/login/userlogin">
+	<form id="from2" action="${pageContext.request.contextPath}/userlogin">
 		<input type="text" name="user_name" />
 		<input type="password" name="password" />
 		<span id="spenId"></span>

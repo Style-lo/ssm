@@ -121,6 +121,8 @@ public class asd {
 			System.out.println(new Timestamp(System.currentTimeMillis()));
 		}
 		
+		
+		
 	public static void main(String[] args) {
 //		s8();
 		Integer a = 1000, b = 1000;  
@@ -146,6 +148,26 @@ public class asd {
 		}
         System.out.println( result?"是今天。":"不是今天。" );
 		ss(1);*/
+//	    s9();
+	    s10();
+	}
+	
+	public static void s10(){
+		int i=100;
+		for (int j = 0; j < i; j++) {
+			System.out.print("fuck"+j);
+		}
+	}
+	
+	
+	public static void s9(){
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 3; i++) {
+			sb.append("asdasd").append(",");
+		}
+		System.out.println(sb);
+		String string = sb.toString();
+		System.out.println(string.substring(0,string.length()-1));
 	}
 	
 	public static void s5(){

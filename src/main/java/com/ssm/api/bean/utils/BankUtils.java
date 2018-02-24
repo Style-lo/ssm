@@ -75,7 +75,7 @@ public class BankUtils {
 	}
 
 	/** 
-     * TODO  
+     * TODO  http://blog.csdn.net/yqwang75457/article/details/72627542
      * @param cardNo 银行卡卡号 
      * @return {"bank":"CMB","validated":true,"cardType":"DC","key":"(卡号)","messages":[],"stat":"ok"} 
      * 2017年5月22日 下午4:35:23 
@@ -85,12 +85,19 @@ public class BankUtils {
         url+=cardNo+"&cardBinCheck=true"; 
         	Result result = HttpUtils.get(url);
         	JSONObject jsonObject = result.toJSONObject();
-//        	System.out.println("HttpGet: "+jsonObject);
-        	String string = jsonObject.get("bank").toString();
-        	System.out.println(string);
-        return jsonObject.toString();  
+        	if (jsonObject == null || "false".equals(jsonObject.get("validated").toString())) {
+				return null;
+			}
+        	String bankKey = jsonObject.get("bank").toString();
+        	Map<String, Object> barkMap = JSONObject.parseObject(BANK_JSON);
+//        	String imgString = "https://apimg.alipay.com/combo.png?d=cashier&t=ABC（银行简称-大写）";
+        	String img = "https://apimg.alipay.com/combo.png?d=cashier&t="+bankKey;
+        	System.out.println("银行图标: "+img);
+        	String str = barkMap.get(jsonObject.get("bank")).toString();
+        	return str;
+//        return jsonObject.toString();  
     }
 	public static void main(String[] args) {
-		System.out.println(getCardDetail("622262 0750004282897"));
+		System.out.println(getCardDetails("6222620750004282897"));
 	}
 }

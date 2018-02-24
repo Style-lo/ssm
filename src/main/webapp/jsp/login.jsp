@@ -11,43 +11,49 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/ajaxfileupload.js" ></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/commonJs.js" ></script>
 <script type="text/javascript">
-var login = {};
-login.QueryBtn = function(){
-	login.testUpload();
-}
-
-login.testUpload = function(){
-	var obj=commonJs.getFormData("#from2");
-	console.log(obj);
-	var url="http://localhost:8090/ssm/userlogin";
-	
-    $.ajax({
-		/* url:"${pageContext.request.contextPath}/userlogin", */
-		 url:url, 
-		type:"POST",
-		dataType:"json", 
-		data:{"jsonParams" : JSON.stringify(obj)},
-		success:function(date){
-			if(date == null || date.equas("")){
-				("#spenId").innerText = "账号或密码错误，请重新输入！";
-			}
-			
-		}
-	});
-}
-$(document).ready(function(){
-	console.log("页面加载成功！");
-	$('#QueryBtn').click(function(){
-		login.QueryBtn();
-	});
-});
 		
+	var login = function (){
+			console.log("点击事件成功")
+			var obj=commonJs.getFormData("#from2");
+			var user_name = document.getElementById('user_name');
+			var password = document.getElementById('password');
+			var oBtn = document.getElementById('QueryBtn');
+			function isnull(val) {
+
+		        var str = val.replace(/(^\s*)|(\s*$)/g, '');//去除空格;
+
+		        if (str == '' || str == undefined || str == null) {
+		            console.log('空')
+		        } else {
+		            console.log('非空');
+		        }
+		    };
+		   oBtn.onclick = function(){
+			   isnull(user_name.val);
+		   } 
+		   oBtn.onclick = function(){
+			   isnull(password.val);
+		   } 
+			$.ajax({
+				url:"${pageContext.request.contextPath}/userlogin", 
+				type:"POST",
+				dataType:"json", 
+				headers:{"Content-Type":"application/json"},
+				data:{"jsonParams" : JSON.stringify(obj)},
+				success:function(date){
+					if(date != null || !date.equas("")){
+						("#spenId").innerText = "账号或密码错误，请重新输入！";
+					}
+				}
+			});
+	}
 </script>
 <body>
 	<form id="from2" action="${pageContext.request.contextPath}/userlogin">
-		<input type="text" name="user_name" />
-		<input type="password" name="password" />
+		<input type="text" name="user_name" id="user_name"/>
+		<input type="password" name="password" id="password"/>
 		<span id="spenId"></span>
+		<button type="button" onclick="login()" > test </button>
 		<button type="button" id ="QueryBtn"> 登录 </button>
 	</form>
 </body>

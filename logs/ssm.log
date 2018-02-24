@@ -741,4 +741,9 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:304)
 	... 32 more
 [INFO] [2017-11-28 21:10:15][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@1d057a39: startup date [Tue Nov 28 21:10:15 CST 2017]; root of context hierarchy
+ [WARN] [2018-02-24 11:23:44][org.apache.http.client.protocol.ResponseProcessCookies]Cookie rejected [zone="GZ00C", version:0, domain:.gz00c.alipay.com, path:/, expiry:null] Illegal domain attribute "gz00c.alipay.com". Domain of origin: "ccdcapi.alipay.com"
+ [WARN] [2018-02-24 11:24:33][org.apache.http.client.protocol.ResponseProcessCookies]Cookie rejected [zone="GZ00C", version:0, domain:.gz00c.alipay.com, path:/, expiry:null] Illegal domain attribute "gz00c.alipay.com". Domain of origin: "ccdcapi.alipay.com"
+ [WARN] [2018-02-24 11:26:11][org.apache.http.client.protocol.ResponseProcessCookies]Cookie rejected [zone="GZ00C", version:0, domain:.gz00c.alipay.com, path:/, expiry:null] Illegal domain attribute "gz00c.alipay.com". Domain of origin: "ccdcapi.alipay.com"
+ [WARN] [2018-02-24 11:26:32][org.apache.http.client.protocol.ResponseProcessCookies]Cookie rejected [zone="GZ00C", version:0, domain:.gz00c.alipay.com, path:/, expiry:null] Illegal domain attribute "gz00c.alipay.com". Domain of origin: "ccdcapi.alipay.com"
+ [WARN] [2018-02-24 11:27:14][org.apache.http.client.protocol.ResponseProcessCookies]Cookie rejected [zone="GZ00C", version:0, domain:.gz00c.alipay.com, path:/, expiry:null] Illegal domain attribute "gz00c.alipay.com". Domain of origin: "ccdcapi.alipay.com"
  

@@ -10,6 +10,8 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
+
 public class asd {
 
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
@@ -149,8 +151,34 @@ public class asd {
         System.out.println( result?"是今天。":"不是今天。" );
 		ss(1);*/
 //	    s9();
-	    s10();
+//	    s10();
+//	   System.out.println( filter("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]"+"tt"));
+//	   System.out.println( replaceEmoji(patternString));
+//	    ssqwe();
+	    System.out.println("[\uD83C\uDC04-\uD83C\uDE1A]");
+	  System.out.println( filterEmoji("有表情的字符串"+"[\uD83C\uDC04-\uD83C\uDE1A]","把表情替换成这个字符串"));
 	}
+	/**
+     * emoji表情替换
+     *
+     * @param source 原字符串
+     * @param slipStr emoji表情替换成的字符串
+     * @return 过滤后的字符串
+     */
+    public static String filterEmoji(String source,String slipStr) {
+        if(StringUtils.isNotBlank(source)){
+            return source.replaceAll("[\\ud800\\udc00-\\udbff\\udfff\\ud800-\\udfff]", slipStr);
+        }else{
+            return source;
+        }
+    }
+	
+	public static String replaceEmoji(String str) {
+        String patternString = "[\uD83C\uDC04-\uD83C\uDE1A]|[\uD83D\uDC66-\uD83D\uDC69]|[\uD83D\uDC66\uD83C\uDFFB-\uD83D\uDC69\uD83C\uDFFF]|[\uD83D\uDE45\uD83C\uDFFB-\uD83D\uDE4F\uD83C\uDFFF]|[\uD83C\uDC00-\uD83D\uDFFF]|[\uD83E\uDD10-\uD83E\uDDC0]|[\uD83D\uDE00-\uD83D\uDE4F]|[\uD83D\uDE80-\uD83D\uDEF6]"+"asdsa";
+        Pattern pattern = Pattern.compile(str);
+        Matcher matcher = pattern.matcher("");
+        return matcher.replaceAll("");
+    }
 	
 	public static void s10(){
 		int i=100;
@@ -158,6 +186,7 @@ public class asd {
 			System.out.print("fuck"+j);
 		}
 	}
+	
 	
 	
 	public static void s9(){

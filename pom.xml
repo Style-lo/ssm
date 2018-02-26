@@ -228,6 +228,15 @@
             <artifactId>wxpay-sdk</artifactId>
             <version>0.0.3</version>
         </dependency>
+        
+        <!-- 支付宝 -->
+		<!-- <dependency>
+		    <groupId>com.pentahohub.nexus</groupId>
+		    <artifactId>alipay-sdk-java</artifactId>
+		    <version>20150820220052</version>
+		</dependency> -->
+		
+        
   </dependencies>
   <build>
      <defaultGoal>compile</defaultGoal>   

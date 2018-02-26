@@ -49,6 +49,9 @@
 	}
 </script>
 <body>
+<from id="froms" action="${pageContext.request.contextPath}/viewOrder">
+<button type="submit" id ="QueryBtnsss">zhifu  </button>
+</from>
 	<form id="from2" action="${pageContext.request.contextPath}/userlogin">
 		<input type="text" name="user_name" id="user_name"/>
 		<input type="password" name="password" id="password"/>

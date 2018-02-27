@@ -270,6 +270,14 @@
         </dependency> -->
         <!-- 玄武科技MOS end -->
         
+        <!-- lombok  使用注解为类提供属性方法( set get 等) 可参考ssm/api/bean/request/User.java对象 -->
+	    <dependency>
+	        <groupId>org.projectlombok</groupId>
+	        <artifactId>lombok</artifactId>
+	        <version>1.16.10</version>
+	    </dependency>
+        
+        
   </dependencies>
   <build>
      <defaultGoal>compile</defaultGoal>   

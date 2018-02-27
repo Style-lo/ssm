@@ -1,4 +1,4 @@
-package com.ssm.api.bean.utils;
+package com.ssm.api.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

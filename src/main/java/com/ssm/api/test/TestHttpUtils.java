@@ -1,15 +1,12 @@
 package com.ssm.api.test;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.util.DigestUtils;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.ssm.api.bean.utils.HttpUtils;
-import com.ssm.api.bean.utils.HttpUtils.Result;
+import com.ssm.api.utils.HttpUtils;
+import com.ssm.api.utils.HttpUtils.Result;
 
 public class TestHttpUtils {
 

@@ -1,4 +1,4 @@
-package com.ssm.api.bean.utils;
+package com.ssm.api.utils;
 
 
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ssm.api.bean.utils.HttpUtils.Result;
+import com.ssm.api.utils.HttpUtils.Result;
 
 /**
  * 通过银行卡号获取银行名称

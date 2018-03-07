@@ -15,4 +15,6 @@ public interface UserService {
 	int insertUser(User user, UserLog userLog, UserMoney userMoney);
 
 	User userLogin(User user);
+	
+	List<User> stateGetUser(String type, int state);
 }

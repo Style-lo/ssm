@@ -3,6 +3,7 @@ package com.ssm.api.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 
 import com.ssm.api.bean.entity.UserLog;
 import com.ssm.api.bean.entity.UserMoney;
@@ -19,4 +20,6 @@ public interface UserDao {
 	int insertUseLog(UserLog userLog);
 	
 	User userLogin(User user);
+	
+	List<User> stateGetUser(@Param("type")String type, @Param("state")int state);
 }

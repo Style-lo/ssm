@@ -41,6 +41,18 @@ public class UserController {
 		return userId.getUser_name();
 		
 	}
+	@RequestMapping(value="stateGetUser",method={(RequestMethod.GET),(RequestMethod.POST)})
+	public Object stateGetUser(@RequestParam String type,@RequestParam int state){
+		
+		List<User> stateGetUser = userService.stateGetUser(type, state);
+		for (User user : stateGetUser) {
+			System.out.println(user);
+		}
+		return "ok";
+		
+	}
+	
+	
 	
 	@RequestMapping(value="insertUser")
 	public String insertUser(User user,UserLog userLog, UserMoney userMoney){

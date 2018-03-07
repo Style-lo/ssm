@@ -31,4 +31,14 @@
 	<select id="userLogin" resultType="com.ssm.api.bean.request.User">
 		select * from user where user_name = #{user_name} and password = #{password}
 	</select>
+	<select id="stateGetUser" resultType="com.ssm.api.bean.request.User">
+		select * from user where 
+			<if test="type == all">
+				1 = 1
+			</if>
+			<if test="type != all">
+				 state=#{1}
+			</if>
+			
+	</select>
 </mapper>

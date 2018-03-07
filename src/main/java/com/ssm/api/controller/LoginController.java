@@ -17,10 +17,10 @@ public class LoginController {
 	private UserService userService;
 	
 	@RequestMapping(value="userlogin")
-	public String getUserId(User user){
+	public String getUserId(@RequestBody User user){
 		User userLogin = userService.userLogin(user);
 		if (userLogin == null) {
-			return "您输入的账号密码有误！";
+			return null;
 		}
 		return "/loginOK";
 		

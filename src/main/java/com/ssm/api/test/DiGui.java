@@ -1,5 +1,8 @@
 package com.ssm.api.test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DiGui {
 	 public static void m(int i) { 
 		    if (i == 1) { 
@@ -14,6 +17,13 @@ public class DiGui {
 		  }  
 	 
 	 public static void main(String[] args) {
-		m(2);
+//		m(2);
+		Map<String, Double> map = null;
+		if (1==2) {
+			map = new HashMap<String, Double>();
+			Double double1 = map.get("s");
+		}
+		
+		System.out.println(map+"====");
 	}
 }

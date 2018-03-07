@@ -62,6 +62,12 @@ public class UserServiceImpl implements UserService {
 		return userDao.userLogin(user);
 	}
 
+	@Override
+	public List<User> stateGetUser(String type, int state) {
+		
+		return userDao.stateGetUser(type, state);
+	}
+
 	
 
 }

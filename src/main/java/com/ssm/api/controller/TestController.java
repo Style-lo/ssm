@@ -6,34 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssm.api.bean.request.User;
 import com.ssm.api.service.UserService;
 
 
 @Controller
-//@RequestMapping("api/v1/login")
-public class LoginController {
+@RequestMapping("api/v1/test")
+public class TestController {
 
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="userlogin")
-	@ResponseBody
-	public String getUserId( User user, HttpSession session){
-		User userLogin = userService.userLogin(user);
-		if (userLogin == null) {
-			return null;
-		}
-		session.setAttribute("user", user);
-		return "/loginOK";
-		
-	}
-	@RequestMapping(value="userloginOut")
+	@RequestMapping(value="ok")
 	public String userloginOut(HttpSession session){
-		session.invalidate();
-		return "/login";
+		System.out.println("登陆成功页面点击跳转");
+		return "登陆成功页面点击跳转";
 		
 	}
 	

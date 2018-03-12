@@ -10,7 +10,10 @@
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd    
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
-                         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">  
+                        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">  
+ 
+ 
+ 
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->  
     <!-- <context:component-scan base-package="com.ssm.api.controller" /> -->  
     <!-- 设置默认配置方案    配置了这个才能使用@Controller注解-->
@@ -63,4 +66,15 @@
     <task:scheduler id="qbScheduler" pool-size="10"/> 
     
     <bean class="com.ssm.api.extension.OneMinTask"></bean> 
+    
+    <!-- 拦截器，使用com.ssm.api.extension.Myinter这个拦截器拦截所有 /api/v1 的请求 -->
+    <mvc:interceptors>
+    	<!-- 使用com.ssm.api.extension.Myinter这个拦截器拦截所有请求 -->
+    	<!-- <bean class="com.ssm.api.extension.Myinter"></bean> -->
+    	<mvc:interceptor>
+    		<mvc:mapping path="/api/v1/**"/>
+    		<bean class="com.ssm.api.extension.Myinter"></bean>
+    	</mvc:interceptor>
+    </mvc:interceptors>
+    
 </beans>

@@ -14,5 +14,8 @@
 </script>
 <body>
 	<h1>登录成功jsp</h1>
+	$request.getParameter("user")
+	<a href="${pageContext.request.contextPath}/api/v1/test/ok">跳转</a>
+	<a href="${pageContext.request.contextPath}/userloginOut">退出</a>
 </body>
 </html>

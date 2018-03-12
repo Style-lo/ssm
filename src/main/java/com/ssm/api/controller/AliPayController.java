@@ -31,6 +31,7 @@ import com.ssm.api.bean.request.AliPayRequest;
 import com.ssm.api.service.AliPCPayService;
 
 @Controller
+@RequestMapping("api/v1/alipay")
 public class AliPayController {
 
 	@Autowired

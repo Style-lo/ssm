@@ -14,11 +14,9 @@
 		
 	var login = function (){
 			console.log("点击事件成功")
-			var obj=commonJs.getFormData("#from2");
 			var user_name = document.getElementById('user_name').value;
 			var password = document.getElementById('password').value;
 			console.log(password);
-			console.log(obj+"---");
 			/* var oBtn = document.getElementById('QueryBtn');
 			function isnull(val) {
 
@@ -42,9 +40,11 @@
 				dataType:"json", 
 				headers:{"Content-Type":"application/json"},
 				/* data:{"jsonParams" : JSON.stringify(obj)}, */
-				 data:{'user_name':user_name,'password':password}, 
+				 data:{user_name:user_name,password:password}, 
 				success:function(date){
+					console.log("00000000000000000000000000")
 					if(date == null || !date.equas("")){
+						console.log("00000000000000000000000000")
 						("#spenId").innerText = "账号或密码错误，请重新输入！";
 					}
 				}
@@ -52,9 +52,6 @@
 	}
 </script>
 <body>
-<from id="froms" action="${pageContext.request.contextPath}/viewOrder">
-
-</from>
 	<form id="from2" action="${pageContext.request.contextPath}/userlogin">
 		<input type="text" name="user_name" id="user_name"/>
 		<input type="password" name="password" id="password"/>

@@ -276,7 +276,15 @@
 	        <artifactId>lombok</artifactId>
 	        <version>1.16.10</version>
 	    </dependency>
-        
+	    
+        <!--solr客户端solrj的依赖 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
+		<dependency>
+		    <groupId>org.apache.solr</groupId>
+		    <artifactId>solr-solrj</artifactId>
+		    <version>4.10.4</version>
+		</dependency>
+
         
   </dependencies>
   <build>

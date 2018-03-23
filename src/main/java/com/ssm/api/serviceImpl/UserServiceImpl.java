@@ -39,8 +39,9 @@ public class UserServiceImpl implements UserService {
 			userMoney.setUser_id(user.getId());
 			userDao.insertUseLog(userLog);
 			userDao.insertUserMoney(userMoney);
+			throw new RuntimeException();//手动添加运行时异常报错，事物回滚(运行时异常才会回滚事物)
 		} catch (Exception e) {
-			throw new RuntimeException();
+			e.printStackTrace();
 		}
 		
 		return 0;

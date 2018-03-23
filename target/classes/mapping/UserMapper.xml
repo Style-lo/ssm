@@ -16,7 +16,7 @@
 		select * from user
 	</select>
 	
-	<insert id="insertUser" useGeneratedKeys="true" keyProperty="order_id" parameterType="com.ssm.api.bean.request.User">
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.ssm.api.bean.request.User">
 		insert into user (user_name, password, age) values (#{user_name}, #{password}, #{age})
 	</insert>
 	
@@ -25,7 +25,7 @@
 	</insert>
 	
 	<insert id="insertUseLog">
-		insert into user (user_id, date, msg) values (#{user_id}, #{date}, #{msg})
+		insert into user_log (user_id, date, msg) values (#{user_id}, #{date}, #{msg})
 	</insert>
 	
 	<select id="userLogin" resultType="com.ssm.api.bean.request.User">

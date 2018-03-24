@@ -9,14 +9,11 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class ShopncGoods {
+public class ShopncStore {
 
 	@Field//solr需要加这个注解才能使用这个对象差进solr库
-	private String goods_name;
+	public Integer store_id;
 	@Field
-	private String store_name;
-	@Field
-	private Integer goods_id;
-	private Integer store_id;
+	public String store_name;
 	
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.api.dao.SolrDao" >
+	
+	<select id="getBygoodsId" resultType="com.ssm.api.bean.entity.ShopncGoods">
+		select goods_id,goods_name,store_name,store_id from shopnc_goods where goods_id =#{0}
+	</select>
+	<select id="storeIdgetGoods" resultType="com.ssm.api.bean.entity.ShopncGoods">
+		select goods_id,goods_name,store_name,store_id from shopnc_goods where store_id =#{0} limit #{1},#{2}
+	</select>
+	<select id="getBystoreId" resultType="com.ssm.api.bean.entity.ShopncStore">
+		select store_id,store_name from shopnc_store where store_id =#{0}
+	</select>
+</mapper>

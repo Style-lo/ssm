@@ -50,9 +50,18 @@ public class Testss {
 //		s10();
 //		s12();
 //		s13();
-		s14();
+//		s14();
+		s15();
 	}
-	
+	public static void s15(){
+		String ss= "asd";
+		String ss1= "阿萨德";
+		String ss2= "ASD";
+		System.out.println(ss.toLowerCase());
+		System.out.println(ss1.toLowerCase());
+		System.out.println(ss2.toLowerCase());
+		
+	}
 	public static void s14(){
 		int s =2;
 		int d = 1;

@@ -24,17 +24,36 @@ public class SolrController {
 	@Autowired
 	SolrServer solrServer;
 	
-	
-	@RequestMapping("updateOneGoods")
-	public void updateGoods(){
-		boolean updateGoods = solrServiceImpl.updateGoods(2);
+	/**
+	 * 全量更新solr库，推荐网页上操作
+	 */
+	@RequestMapping("insertSolr")
+	public void insertSolr(){
+		boolean updateGoods = solrServiceImpl.insertSolr();
 		String ss = updateGoods ? "成功": "失败";
 		System.out.println(ss);
 	}
-	@RequestMapping("updateOneStore")
-	public void updateStore(@RequestParam Integer store_id){
-		boolean updateGoods = solrServiceImpl.updateStore(store_id);
+	
+	
+	/**
+	 * 单个商品更新
+	 * @param store_id
+	 */
+	@RequestMapping("updateOneGoods/{goods_id}")
+	public void updateGoods(@PathVariable("goods_id") Integer goods_id){
+		boolean updateGoods = solrServiceImpl.updateGoods(goods_id);
 		String ss = updateGoods ? "成功": "失败";
+		System.out.println(ss);
+	}
+	
+	/**
+	 * 单家店铺更新
+	 * @param store_id
+	 */
+	@RequestMapping("updateOneStore/{store_id}")
+	public void updateStore(@PathVariable("store_id") Integer store_id){
+		boolean updateStore = solrServiceImpl.updateStore(store_id);
+		String ss = updateStore ? "成功": "失败";
 		System.out.println(ss);
 	}
 	

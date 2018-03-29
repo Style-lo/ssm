@@ -17,6 +17,7 @@ public class ShopncGoods {
 	private String store_name;
 	@Field
 	private Integer goods_id;
+	@Field
 	private Integer store_id;
 	
 }

@@ -1,5 +1,6 @@
 package com.ssm.api.service.solrImpl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.ssm.api.bean.entity.KeyWord;
@@ -275,6 +277,30 @@ public class SolrServiceImpl implements SolrService{
         query.setStart(Integer.valueOf(map.isEmpty()? "0" : map.get("pageIndex").toString()));
         query.setRows(Integer.valueOf(map.isEmpty()? "6" : map.get("now").toString()));
 		return query;
+	}
+	
+	/**
+	 * 全量更新，推荐直接在网页上操作
+	 */
+	@Override
+	public boolean insertSolr() {
+		List<ShopncGoods> allGoods;
+		int start=0;
+		while(true){
+			allGoods = solrDao.getAllGoods(start , 2000);
+			start+=2000;//防止数据量太大一次插入2000条
+			if (allGoods == null || allGoods.size() < 1) return true;
+			
+			try {
+				solrServer.addBeans(allGoods);
+				solrServer.commit();
+			} catch (SolrServerException | IOException e) {
+				e.printStackTrace();
+			}
+			if (allGoods != null || !allGoods.isEmpty()) {
+				allGoods.clear();//清空集合，释放内存
+			}
+		}
 	}
 	
 }

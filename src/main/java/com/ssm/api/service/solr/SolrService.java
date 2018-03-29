@@ -15,4 +15,6 @@ public interface SolrService {
     boolean addPromptWords(String word);
     //搜索框查询
     List<ShopncGoods> getSolrQuerys(String word, Map map);
+    //数据库全部导入solr
+    boolean insertSolr();
 }

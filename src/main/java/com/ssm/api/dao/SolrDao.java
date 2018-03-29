@@ -12,4 +12,8 @@ public interface SolrDao {
 	List<ShopncGoods> storeIdgetGoods(Integer store_id,int statr,int end);
 	
 	ShopncStore getBystoreId(Integer store_id);
+
+	List<ShopncGoods> getAllGoods();
+
+	List<ShopncGoods> getAllGoods(int start, int limit);
 }

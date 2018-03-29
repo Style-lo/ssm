@@ -11,4 +11,7 @@
 	<select id="getBystoreId" resultType="com.ssm.api.bean.entity.ShopncStore">
 		select store_id,store_name from shopnc_store where store_id =#{0}
 	</select>
+	<select id="getAllGoods" resultType="com.ssm.api.bean.entity.ShopncGoods">
+		select goods_id, goods_name, store_id, store_name from shopnc_goods limit #{0}, #{1}
+	</select>
 </mapper>

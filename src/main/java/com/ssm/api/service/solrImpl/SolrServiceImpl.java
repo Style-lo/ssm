@@ -1,6 +1,5 @@
 package com.ssm.api.service.solrImpl;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,7 +9,9 @@ import java.util.Map;
 import org.apache.commons.collections.ListUtils;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
+import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
@@ -38,6 +39,7 @@ public class SolrServiceImpl implements SolrService{
     private SolrServer solrServer;
 	
 	public static final String solrURL="http://127.0.0.1:8888/solr/test";
+	private static final String String = null;
 	public static SolrServer getSolrService(){
 		SolrServer solrServer = new HttpSolrServer(solrURL);
 		return solrServer;
@@ -107,17 +109,17 @@ public class SolrServiceImpl implements SolrService{
 	
 	/**
 	 * suggest智能提示
-	 * @param work 查询的字段
+	 * @param word 查询的字段
 	 * @param limit	分页
 	 * @return
 	 */
-	public List<String> getSuggest(String work, Integer limit){
+	public List<String> getSuggest(String word, Integer limit){
 		if(limit == null) limit=2;
-		if(work == null || "".equals(work)) return null;
+		if(word == null || "".equals(word)) return null;
 		
 		try {
 			SolrServer server = getSolrService();
-			SolrQuery query = getSolrQuery(work,limit);
+			SolrQuery query = getSolrQuery(word,limit);
 			//执行查询
 			QueryResponse response = server.query(query);
 			//获取文档列表
@@ -135,16 +137,16 @@ public class SolrServiceImpl implements SolrService{
 	
 	/**
 	 * 添加查询条件
-	 * @param work
+	 * @param word
 	 * @param limit
 	 * @return
 	 */
-	public SolrQuery getSolrQuery(String work, Integer limit){
+	public SolrQuery getSolrQuery(String word, Integer limit){
 		SolrQuery query = new SolrQuery();
 		StringBuilder sb = new StringBuilder();
 		//查询条件		字母则会小写，汉字不变 并且kw不等于自己  (-kw)
-		//例如 work="水果" 则不提示水果，会提示水果篮等,如没有(-kw)或者去掉(-)会提示水果
-		sb.append("suggest:").append(work.toLowerCase()).append("* AND -kw:").append(work.toLowerCase());
+		//例如 word="水果" 则不提示水果，会提示水果篮等,如没有(-kw)或者去掉(-)会提示水果
+		sb.append("suggest:").append(word.toLowerCase()).append("* AND -kw:").append(word.toLowerCase());
 		//添加需要回显得内容
 		query.setQuery(sb.toString());
         query.addField("kw");
@@ -227,6 +229,52 @@ public class SolrServiceImpl implements SolrService{
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	/**
+	 *  查询
+	 * @param word 查询关键字
+	 * @param map 分页
+	 * @return
+	 */
+	@Override
+	public List<ShopncGoods> getSolrQuerys(String word,Map map){
+		String ik = SolrUtils.getIk(solrServer, word);
+		this.addPromptWords(word);//频率 +1
+		SolrQuery query = getSolrQuery(word,map,ik);//查询条件
+		QueryResponse response = null;
+		List<ShopncGoods> list = new ArrayList<ShopncGoods>();
+		try {
+			response = solrServer.query(query, SolrRequest.METHOD.POST);
+			SolrDocumentList results2 = response.getResults();
+			SolrResults beanSolrResults = SolrUtils.toBeanSolrResults(results2, ShopncGoods.class);
+			System.out.println("results : "+results2);
+			System.out.println("beanSolrResults : "+beanSolrResults.getDocs());
+			
+			for (Object listObject : beanSolrResults.getDocs().toArray()) {
+				ShopncGoods goods  = (ShopncGoods)listObject;
+				list.add(goods);
+				System.out.println(goods);
+			}
+			
+		} catch (SolrServerException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	//搜索框查询时查询条件
+	private SolrQuery getSolrQuery(String word, Map map, String ik) {
+		
+		SolrQuery query = new SolrQuery();
+		word = word.replaceAll(" ","");//去除空格
+		query.setQuery("store_text:"+ik);
+//		query.set("q", word);
+//		query.addSort(word, SolrQuery.ORDER.desc);//分数排序
+        query.setStart(Integer.valueOf(map.isEmpty()? "0" : map.get("pageIndex").toString()));
+        query.setRows(Integer.valueOf(map.isEmpty()? "6" : map.get("now").toString()));
+		return query;
 	}
 	
 }

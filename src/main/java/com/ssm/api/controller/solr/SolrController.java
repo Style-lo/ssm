@@ -1,6 +1,7 @@
 package com.ssm.api.controller.solr;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrServer;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ssm.api.bean.entity.ShopncGoods;
 import com.ssm.api.service.solrImpl.SolrServiceImpl;
 
 @Controller
@@ -21,6 +23,8 @@ public class SolrController {
 	SolrServiceImpl solrServiceImpl;
 	@Autowired
 	SolrServer solrServer;
+	
+	
 	@RequestMapping("updateOneGoods")
 	public void updateGoods(){
 		boolean updateGoods = solrServiceImpl.updateGoods(2);
@@ -35,13 +39,6 @@ public class SolrController {
 	}
 	
 	
-/*	@RequestMapping("getWord")
-	public void updateStore(@RequestParam String work){
-		List<String> suggestedWords = solrServiceImpl.getPrompt(solrServer,work,5);
-		for (String string : suggestedWords) {
-			System.out.println(string);
-		}
-	}*/
 	/**
 	 * Suggest 智能提示
 	 * @param work
@@ -59,12 +56,20 @@ public class SolrController {
 		return prompt;
 	}
 	
+	/**
+	 * 搜索查询
+	 * @param work
+	 */
 	@RequestMapping("getWord/{work}")
 	public void updateStore(@PathVariable("work") String work){
 		 try {
-//			boolean addPromptWords = solrServiceImpl.ss("cs");
-			boolean addPromptWords = solrServiceImpl.addPromptWords("cs 测试");
-			System.out.println(addPromptWords);
+			List<ShopncGoods> list = solrServiceImpl.getSolrQuerys(work, new HashMap());
+			for (ShopncGoods shopncGoods : list) {
+				System.out.println(shopncGoods.getGoods_id());
+				System.out.println(shopncGoods.getGoods_name());
+				System.out.println(shopncGoods.getStore_name());
+			}
+			System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

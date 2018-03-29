@@ -1,27 +1,32 @@
 package com.ssm.api.service.solrImpl;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.ListUtils;
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrQuery.ORDER;
 import org.apache.solr.client.solrj.SolrServer;
-import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssm.api.bean.entity.KeyWord;
 import com.ssm.api.bean.entity.ShopncGoods;
 import com.ssm.api.bean.entity.ShopncStore;
 import com.ssm.api.bean.entity.SolrResults;
 import com.ssm.api.dao.SolrDao;
 import com.ssm.api.service.solr.SolrService;
+import com.ssm.api.utils.PinYinUtils;
+import com.ssm.api.utils.SolrUtils;
 
 
 @Service
@@ -32,8 +37,11 @@ public class SolrServiceImpl implements SolrService{
 	@Autowired
     private SolrServer solrServer;
 	
-	public static final String testURl="http://127.0.0.1:8888/solr/test";
-	
+	public static final String solrURL="http://127.0.0.1:8888/solr/test";
+	public static SolrServer getSolrService(){
+		SolrServer solrServer = new HttpSolrServer(solrURL);
+		return solrServer;
+	}
 	/** (non-Javadoc)
 	 * solr库单个商品更新
 	 */
@@ -96,118 +104,129 @@ public class SolrServiceImpl implements SolrService{
 		return true;
 	}
 
-	public void ss() throws SolrServerException{
-//		solrServer = getSolrServer();//查询关键词是否存在
-        StringBuilder sb = new StringBuilder();
-        sb.append("kw:").append("小龟");
-        SolrQuery query = new SolrQuery();
-        query.setQuery(sb.toString());
-        //执行查询。得到一个Response对象。
-        QueryResponse response = solrServer.query(query);
-        System.out.println(response);
+	
+	/**
+	 * suggest智能提示
+	 * @param work 查询的字段
+	 * @param limit	分页
+	 * @return
+	 */
+	public List<String> getSuggest(String work, Integer limit){
+		if(limit == null) limit=2;
+		if(work == null || "".equals(work)) return null;
+		
+		try {
+			SolrServer server = getSolrService();
+			SolrQuery query = getSolrQuery(work,limit);
+			//执行查询
+			QueryResponse response = server.query(query);
+			//获取文档列表
+	        SolrDocumentList documentList = response.getResults();
+	        if (documentList.getNumFound() > 0) {
+	        	SolrResults<String> solrDocumentListToBean = this.solrDocumentListToBean(documentList, String.class);//转换成实体bean
+	        	return solrDocumentListToBean.getDocs();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ListUtils.EMPTY_LIST;//返回一个空列表 [ ]
 	}
 	
-	public List<String> getPrompt( String prefix, Integer limit) {
-        if(limit==null)limit =5;//默认五个
-        if (prefix==null||"".equals(prefix.trim())||limit<=0){//符合这些条件直接返回空
-            return ListUtils.EMPTY_LIST;
-        }
-//        SolrServer solrServer = null;
-        try {
-//            solrServer = getSolrServer();
-        	SolrServer server = new HttpSolrServer("http://127.0.0.1:8888/solr/test");
-            SolrQuery query = getSuggestQuery(prefix, limit);
-            //执行查询。得到一个Response对象。
-            QueryResponse response = server.query(query);
-            if(response.getResults().getNumFound()>0L){//有记录
-                //更新不为空的字段
-                SolrDocumentList results = response.getResults();
-                SolrResults<String> solrResults = this.toBeanSolrResults(response.getResults(), String.class);
-                if(solrResults!=null){
-                    return solrResults.getDocs();
-                }
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            return ListUtils.EMPTY_LIST;
-        }
-        return ListUtils.EMPTY_LIST;
-    }
+	/**
+	 * 添加查询条件
+	 * @param work
+	 * @param limit
+	 * @return
+	 */
+	public SolrQuery getSolrQuery(String work, Integer limit){
+		SolrQuery query = new SolrQuery();
+		StringBuilder sb = new StringBuilder();
+		//查询条件		字母则会小写，汉字不变 并且kw不等于自己  (-kw)
+		//例如 work="水果" 则不提示水果，会提示水果篮等,如没有(-kw)或者去掉(-)会提示水果
+		sb.append("suggest:").append(work.toLowerCase()).append("* AND -kw:").append(work.toLowerCase());
+		//添加需要回显得内容
+		query.setQuery(sb.toString());
+        query.addField("kw");
+        query.setSort("kwfreq", ORDER.desc);//按照id降序排列
+//        query.addFilterQuery("kwfreq:[20 TO *]");//频率大于等于(20)多少才输出
+        query.setRows(limit);//设置每页显示多少条
+		return query;
+	}
+	/**
+	 *  SolrDocumentList转换实体bean
+	 * @param documentList
+	 * @return
+	 */
+	public SolrResults<String> solrDocumentListToBean(SolrDocumentList documentList, Class clazz){
+		SolrResults<String> results = null;
+		List<String> list= null;
+		if (documentList != null) {
+			results = new SolrResults<String>();
+			list = new ArrayList<String>();
+			if (clazz.equals(String.class)) {
+				for (SolrDocument solrDocument : documentList) {
+					//SolrDocument{kw=折扣} 所以我toArray[0] 拿它的第一个值
+					list.add(solrDocument.values().toArray()[0].toString());
+				}
+			}else {
+				/*for (SolrDocument solrDocument : documentList) {
+					//SolrDocument{kw=折扣} 所以我toArray[0] 拿它的第一个值
+					list.add(solrDocument.values());
+				}*/
+			}
+			results.setDocs(list);
+			results.setNumFound(documentList.getNumFound());//总条数
+			results.setStart(documentList.getStart());//开始数
+		}
+		return results;
+	}
 	
-	private SolrQuery getSuggestQuery(String prefix, Integer limit) {
-        SolrQuery solrQuery = new SolrQuery();
-        StringBuilder sb = new StringBuilder();
-        //字母则会小写，汉字不变 并且kw不等于自己
-        sb.append("suggest:").append(prefix.toLowerCase()).append("* AND -kw:").append(prefix.toLowerCase());
-        solrQuery.setQuery(sb.toString());
-        solrQuery.addFilterQuery("kwfreq:[100 TO *]");//频率大于等于多少才输出
-        solrQuery.addField("kw");
-        //solrQuery.addField("kwfreq");
-        solrQuery.addSort("kwfreq", SolrQuery.ORDER.desc);
-        solrQuery.setStart(0);
-        solrQuery.setRows(limit);
-        return solrQuery;
-    }
-	 public  SolrResults toBeanSolrResults(SolrDocumentList records, Class clazz){
-	        SolrResults solrResults = new SolrResults();
-	        if(records!=null){
-	            List list = new ArrayList();
-	            if(clazz.equals(Integer.class)){
-	                for(SolrDocument record : records){
-	                    list.add((Integer) record.values().toArray()[0]);
-	                }
-	            }else if(clazz.equals(String.class)){
-	                for(SolrDocument record : records) {
-	                    list.add((String) record.values().toArray()[0]);
-	                }
-	            }else {
-	                for(SolrDocument record : records){
-	                    list.add(toBean(record,clazz));
-	                }
-	            }
-	            solrResults.setNumFound(records.getNumFound());
-	            solrResults.setStart(records.getStart());
-	            solrResults.setDocs(list);
-	        }
-	        return solrResults;
-	    }
-	 
-	   /**
-	     * 将SolrDocument转换成Bean
-	     * @param record
-	     * @param clazz
-	     * @return
-	     */
-	    public static Object toBean(SolrDocument record, Class clazz){
-	        Object obj = null;
-	        try {
-	            obj = clazz.newInstance();
-	        } catch (InstantiationException e1) {
-	            e1.printStackTrace();
-	        } catch (IllegalAccessException e1) {
-	            e1.printStackTrace();
-	        }
-	        Field[] fields = clazz.getDeclaredFields();
-	        for(Field field:fields){
-	            boolean fieldHasAnno = field.isAnnotationPresent(org.apache.solr.client.solrj.beans.Field.class);
-	            Object value = null;//赋值value
-	            if(fieldHasAnno){//有注解Field不是默认的
-	                org.apache.solr.client.solrj.beans.Field fieldAnno = field.getAnnotation(org.apache.solr.client.solrj.beans.Field.class);
-	                if(!"#default".equals(fieldAnno.value())){
-	                    value = record.get(fieldAnno.value());
-	                }
-	            }
-	            if(value == null){
-	                value = record.get(field.getName());
-	            }
-	            try {
-	                BeanUtils.setProperty(obj, field.getName(), value);
-	            } catch (IllegalAccessException e) {
-	                e.printStackTrace();
-	            } catch (InvocationTargetException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        return obj;
-	    }
+	
+	/**
+	 * 添加推荐词或推荐词搜索频率+1
+	 */
+	@Override
+	public boolean addPromptWords(String word) {
+		if(word == null || "".equals(word)) return false;
+		KeyWord keyWord = new KeyWord();
+		try {
+			SolrServer solrServer = getSolrService();
+			SolrQuery query = new SolrQuery();
+			StringBuilder sb = new StringBuilder();
+            sb.append("kw:").append(word);
+            query.setQuery(sb.toString());
+            
+			QueryResponse response = solrServer.query(query);
+			SolrDocumentList results = response.getResults();
+			if (results.getNumFound() > 0) {//solr已有索引更新搜索频率
+				SolrDocument solrDocument2 = results.get(0);
+				solrDocument2.getFieldValue("kw");
+				solrDocument2.getFieldValue("kwfreq");
+                //更新不为空的字段
+                SolrInputDocument doc = new SolrInputDocument();
+                //先设置id
+                doc.addField("kw", solrDocument2.getFieldValue("kw"));
+                Map map = new HashMap();
+                //搜索频率 +1
+                map.put("set", solrDocument2.getFieldValue("kwfreq")==null ? 1:((Integer)solrDocument2.getFieldValue("kwfreq"))+1);
+               //直接设值doc.addField("kwfreq", 20);会把索引中其他东西删除
+               //需要doc.addField("kwfreq", {set=20});需要加一个set才不会删除其他东西
+                doc.addField("kwfreq", map);
+                solrServer.add(doc);//添加近solr中
+			}else {//solr中没有索引，添加新索引
+				keyWord.setKw(word);
+				keyWord.setPinyin(Arrays.asList(PinYinUtils.cnToSpell(word)));
+				keyWord.setAbbre(Arrays.asList(PinYinUtils.cnToFirstSpell(word)));
+				keyWord.setKwfreq(1);
+				solrServer.addBean(keyWord);
+			}
+			solrServer.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 }

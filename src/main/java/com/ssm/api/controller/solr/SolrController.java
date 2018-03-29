@@ -1,11 +1,13 @@
 package com.ssm.api.controller.solr;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -40,12 +42,30 @@ public class SolrController {
 			System.out.println(string);
 		}
 	}*/
-	@RequestMapping("getWord")
-	public void updateStore(@RequestParam String work){
+	/**
+	 * Suggest 智能提示
+	 * @param work
+	 */
+	@RequestMapping("getSuggest/{work}")
+	public List<String> getSuggest(@PathVariable("work") String work){
+		List<String> prompt = null;;
 		 try {
-			solrServiceImpl.getPrompt("zk",null);
+			prompt = solrServiceImpl.getSuggest("cs",null);
+			System.out.println(prompt);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+			prompt = new ArrayList<String>();
+		}
+		return prompt;
+	}
+	
+	@RequestMapping("getWord/{work}")
+	public void updateStore(@PathVariable("work") String work){
+		 try {
+//			boolean addPromptWords = solrServiceImpl.ss("cs");
+			boolean addPromptWords = solrServiceImpl.addPromptWords("cs 测试");
+			System.out.println(addPromptWords);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

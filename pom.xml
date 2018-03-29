@@ -278,13 +278,18 @@
 	    </dependency>
 	    
         <!--solr客户端solrj的依赖 -->
-		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
 		<dependency>
 		    <groupId>org.apache.solr</groupId>
 		    <artifactId>solr-solrj</artifactId>
 		    <version>4.10.4</version>
 		</dependency>
 
+		<!-- 中文字符转为拼音字符串依赖  -->
+		<dependency>
+		    <groupId>com.belerweb</groupId>
+		    <artifactId>pinyin4j</artifactId>
+		    <version>2.5.0</version>
+		</dependency>
         
   </dependencies>
   <build>

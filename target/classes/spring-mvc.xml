@@ -21,7 +21,8 @@
 	<mvc:annotation-driven/>
 	<!-- 使用默认的Servlet来响应静态文件 -->
 	<mvc:default-servlet-handler/>
-
+	<!-- swagger使用 -->
+	<mvc:default-servlet-handler />
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->  
     <bean id="mappingJacksonHttpMessageConverter"  
         class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  

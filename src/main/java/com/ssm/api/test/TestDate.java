@@ -198,32 +198,18 @@ public class TestDate {
 	        }
 	        return 0;
 	    }
-	  //book_time : 2017-11-13 21:11:35格式
-	    private static String setBookingTime(String book_time){
-	    	 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String time = null ;
-			if(book_time!=null&&book_time.length()>0){
-				String currentDate = dateFormat.format(new Date()) ;
-				String yearDay = currentDate.split(" ")[0];
-				Calendar now = Calendar.getInstance();
-				now.add(Calendar.DATE,1);
-				String tomorrow = now.getTime().toLocaleString().split(" ")[0] ;
-				if(yearDay.equals(book_time.split(" ")[0])){
-					time = book_time.split(" ")[1].substring(0,5)+"送达" ;
-				}else if(tomorrow.equals(book_time.split(" ")[0])){
-				    time = "明天 "+book_time.split(" ")[1].substring(0,5)+"送达" ;
-				}else{
-					String month = book_time.split(" ")[0].split("-")[1] ;
-					String day = book_time.split(" ")[0].split("-")[2] ;
-					time = month+"月"+day+"日"+" "+book_time.split(" ")[1].substring(0,5)+"送达" ;
-				}
-			}
-			return time ;
-		}
+	    
+	    public static void ss1( long time){
+	 		Date now = new Date();
+	 		long ss = (time)+ 60;
+	 		System.out.println(ss);
+	 		now.setTime((time*1000)+ 1*60*1000);
+				System.out.println(now);
+	 	}
 	    public static void main(String[] args) {
 //	    	s7();
-	    	s4(new Date(), 21 ,0,0);
-	    	System.out.println(setBookingTime("2018-03-22 21:11:35"));
+//	    	s4(new Date(), 21 ,0,0);
+	    	ss1(1522486381);
 //	    	System.out.println(nightFee(new Date()));
 //	    	System.out.println(night());
 		}

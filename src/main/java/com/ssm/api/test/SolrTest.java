@@ -18,7 +18,7 @@ import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 
-import com.test.ShopncGoods;
+import com.ssm.api.bean.entity.ShopncGoods;
 
 public class SolrTest {
 

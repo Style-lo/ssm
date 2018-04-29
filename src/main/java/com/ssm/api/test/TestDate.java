@@ -59,16 +59,19 @@ public class TestDate {
 	
 	}
 //	@Test
-	public void s3(){
+	public static void s3(){
 		String date = "2017-11-20 20:30";
 		SimpleDateFormat sldf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		SimpleDateFormat sss = new SimpleDateFormat("MM-dd hh:mm");
 		try {
 			Date parse = sldf.parse(date);
-			long ss = parse.getTime()/1000;
+			/*long ss = parse.getTime()/1000;
 			System.out.println(ss);
-			System.out.println(parse);
+			System.out.println(parse);*/
+//			Date parses = sss.parse(parse);
+			String format = sss.format(parse);
+			System.out.println(format);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -209,7 +212,8 @@ public class TestDate {
 	    public static void main(String[] args) {
 //	    	s7();
 //	    	s4(new Date(), 21 ,0,0);
-	    	ss1(1522486381);
+//	    	ss1(1522486381);
+	    	s3();
 //	    	System.out.println(nightFee(new Date()));
 //	    	System.out.println(night());
 		}

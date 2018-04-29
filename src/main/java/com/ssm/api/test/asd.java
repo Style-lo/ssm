@@ -15,7 +15,7 @@ import org.apache.commons.lang.StringUtils;
 public class asd {
 
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
-	
+	//
 	private static int setSurplusTime(long add_time,int since_hand){
 		long current = System.currentTimeMillis()/1000 ;
 		int surplusTime = 0 ;

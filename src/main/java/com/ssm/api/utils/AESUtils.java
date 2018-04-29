@@ -10,7 +10,7 @@ import cn.hutool.crypto.symmetric.AES;
  * 
  * @author DerekFung
  */
-public class EncrypDES {
+public class AESUtils {
 
 	public static final String AES_KEY = "dhH78U+myTnB2O9gvEzlQA==";
 	
@@ -22,7 +22,7 @@ public class EncrypDES {
 	 * 加密其他内容
 	 */
 	public static String encodeOther(String content) {
-		byte[] key = Base64.decode(EncrypDES.OTHER_KEY);
+		byte[] key = Base64.decode(AESUtils.OTHER_KEY);
 		AES aes = SecureUtil.aes(key);
 		return aes.encryptHex(String.valueOf(content));
 	}
@@ -31,7 +31,7 @@ public class EncrypDES {
 	 * 解密其他内容
 	 */
 	public static String decodeOther(String content) {
-		byte[] key = Base64.decode(EncrypDES.ORDER_KEY);
+		byte[] key = Base64.decode(AESUtils.ORDER_KEY);
 		AES aes = SecureUtil.aes(key);
 		return aes.decryptStr(content, CharsetUtil.CHARSET_UTF_8);
 	}
@@ -40,7 +40,7 @@ public class EncrypDES {
 	 * 加密订单id
 	 */
 	public static String encodeOrder(int id) {
-		byte[] key = Base64.decode(EncrypDES.ORDER_KEY);
+		byte[] key = Base64.decode(AESUtils.ORDER_KEY);
 		AES aes = SecureUtil.aes(key);
 		return aes.encryptHex(String.valueOf(id));
 	}
@@ -49,7 +49,7 @@ public class EncrypDES {
 	 * 解密订单id
 	 */
 	public static int decodeOrder(String content) {
-		byte[] key = Base64.decode(EncrypDES.ORDER_KEY);
+		byte[] key = Base64.decode(AESUtils.ORDER_KEY);
 		AES aes = SecureUtil.aes(key);
 		String id = aes.decryptStr(content, CharsetUtil.CHARSET_UTF_8);
 		return Integer.valueOf(id);
@@ -59,7 +59,7 @@ public class EncrypDES {
 	 * 加密积分
 	 */
 	public static String encodePoint(String content) {
-		byte[] key = Base64.decode(EncrypDES.AES_KEY);
+		byte[] key = Base64.decode(AESUtils.AES_KEY);
 		AES aes = SecureUtil.aes(key);
 		return aes.encryptHex(content);
 	}
@@ -68,7 +68,7 @@ public class EncrypDES {
 	 * 解密积分
 	 */
 	public static String decodePoint(String content) {
-		byte[] key = Base64.decode(EncrypDES.AES_KEY);
+		byte[] key = Base64.decode(AESUtils.AES_KEY);
 		AES aes = SecureUtil.aes(key);
 		return aes.decryptStr(content, CharsetUtil.CHARSET_UTF_8);
 	}

@@ -29,7 +29,7 @@ import com.ssm.api.serviceImpl.UserServiceImpl;
 
 @Test
 @WebAppConfiguration
-@ContextConfiguration(locations = { "classpath*:/spring-*.xml" })
+@ContextConfiguration(locations = { "classpath*:/*.xml" })
 public class Testing extends AbstractTestNGSpringContextTests{
 	
 	@Autowired

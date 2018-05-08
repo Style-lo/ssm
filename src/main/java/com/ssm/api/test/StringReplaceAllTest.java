@@ -17,4 +17,10 @@ public class StringReplaceAllTest {
 		System.out.println("替换后"+ss);
 		System.out.println("替换后"+ss2);
 	}
+	
+	public static void s2(){
+		String s="shop_outtime";
+		System.out.println(s.indexOf("shop"));
+		System.out.println(s.indexOf("shop2"));
+	}
 }

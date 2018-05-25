@@ -26,7 +26,7 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.alipay.api.response.AlipayTradeRefundResponse;
-import com.ssm.api.bean.entity.AlipayConfig;
+import com.ssm.api.bean.entity.pay.AlipayConfig;
 import com.ssm.api.bean.request.AliPayRequest;
 import com.ssm.api.service.AliPCPayService;
 

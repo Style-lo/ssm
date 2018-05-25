@@ -6,7 +6,7 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.ssm.api.bean.entity.AlipayConfig;
+import com.ssm.api.bean.entity.pay.AlipayConfig;
 import com.ssm.api.bean.request.AliPayRequest;
 import com.ssm.api.service.AliPCPayService;
 

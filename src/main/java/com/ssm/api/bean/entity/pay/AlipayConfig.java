@@ -1,4 +1,4 @@
-﻿package com.ssm.api.bean.entity;
+﻿package com.ssm.api.bean.entity.pay;
 
 import java.io.FileWriter;
 import java.io.IOException;

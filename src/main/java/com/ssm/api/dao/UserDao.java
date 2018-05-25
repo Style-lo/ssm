@@ -24,4 +24,6 @@ public interface UserDao extends Mapper<T>{
 	User userLogin(User user);
 	
 	List<User> stateGetUser(@Param("type")String type, @Param("state")int state);
+	
+	int excelAddUser(List<User> listUser);
 }

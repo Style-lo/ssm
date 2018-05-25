@@ -3,6 +3,7 @@ package com.ssm.api.controller;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssm.api.bean.entity.UserLog;
 import com.ssm.api.bean.entity.UserMoney;
@@ -150,4 +152,11 @@ public class UserController {
         }
 	}
 	
+	
+    @RequestMapping(value="/upload",method = RequestMethod.POST,produces="text/html;charset=UTF-8")  
+    @ResponseBody  
+    public String  upload(@RequestParam(value="file",required = false)MultipartFile file,HttpServletRequest request, HttpServletResponse response){  
+        String result = userService.readExcelFile(file);  
+        return result;  
+    } 
 }

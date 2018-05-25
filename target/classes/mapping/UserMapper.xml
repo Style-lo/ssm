@@ -20,6 +20,13 @@
 		insert into user (user_name, password, age) values (#{user_name}, #{password}, #{age})
 	</insert>
 	
+	<insert id="excelAddUser" parameterType="List">
+		insert into user (user_name, password, age)values
+	    	<foreach item="listUser" index="index" collection="list" open="(" separator="," close=")"> 
+	    	  (#{listUser.user_name}, #{listUser.password}, #{listUser.age})
+	        </foreach>
+	</insert>
+	
 	<insert id="insertUserMoney">
 		insert into user_money (user_id, money, pay) values (#{user_id}, #{money}, #{pay})
 	</insert>

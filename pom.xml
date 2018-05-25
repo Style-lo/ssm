@@ -193,12 +193,21 @@
         </dependency>  
         
         <!-- 导出excel -->
-		<dependency>
+		<!-- <dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi</artifactId>
 		    <version>3.9</version>
-		</dependency>
-        
+		</dependency> -->
+        <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>3.10-FINAL</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>3.10-FINAL</version>
+    </dependency>
         <!-- 通用mapper -->
 		<dependency>
 			<groupId>com.github.abel533</groupId>

@@ -25,5 +25,11 @@ public class Dog {
 	public String toString() {
 		return "Dog [name=" + name + "]";
 	}
-	
+	public static void main(String[] args) {
+		int i=32;
+		long j=64;
+		j=i;
+		System.out.println(j);
+//		i=j;
+	}
 }

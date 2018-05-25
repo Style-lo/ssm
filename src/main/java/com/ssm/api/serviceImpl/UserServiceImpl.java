@@ -3,15 +3,19 @@ package com.ssm.api.serviceImpl;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssm.api.bean.entity.UserLog;
 import com.ssm.api.bean.entity.UserMoney;
 import com.ssm.api.bean.request.User;
 import com.ssm.api.dao.UserDao;
 import com.ssm.api.service.UserService;
+import com.ssm.api.utils.ReadExcel;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -69,6 +73,31 @@ public class UserServiceImpl implements UserService {
 		return userDao.stateGetUser(type, state);
 	}
 
+	@Override
+	public String readExcelFile(MultipartFile file) {
+		String result ="";  
+        //创建处理EXCEL的类  
+        ReadExcel readExcel=new ReadExcel();  
+        //解析excel，获取上传的事件单  
+        List<User> useList = readExcel.getExcelInfo(file);  
+        //至此已经将excel中的数据转换到list里面了,接下来就可以操作list,可以进行保存到数据库,或者其他操作,  
+        //和你具体业务有关,这里不做具体的示范  
+        if(useList != null && !useList.isEmpty()){  
+        	int excelAddUser = userDao.excelAddUser(useList);
+        	result=excelAddUser>0 ? "插入成功":"插入失败";
+        }else{  
+            result = "上传失败";  
+        }  
+        return result;  
+	}
+
+	/** 
+     * 批量增加操作 
+     * @param users 
+     */  
+    public static void ss(List<User> users){  
+          
+    }  
 	
 
 }

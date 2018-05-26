@@ -153,6 +153,13 @@ public class UserController {
 	}
 	
 	
+	/**
+	 * excel 导入，需要先访问这个jsp文件 \jsp\excelInsert.jsp
+	 * @param file
+	 * @param request
+	 * @param response
+	 * @return
+	 */
     @RequestMapping(value="/upload",method = RequestMethod.POST,produces="text/html;charset=UTF-8")  
     @ResponseBody  
     public String  upload(@RequestParam(value="file",required = false)MultipartFile file,HttpServletRequest request, HttpServletResponse response){  

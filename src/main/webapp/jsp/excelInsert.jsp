@@ -44,9 +44,5 @@
 		<input type="file" name="file" value="file">
 		<input type="submit" value="确定">
 	</form>
-	<form id="test" enctype="multipart/form-data">    
-	    选择文件:<input data-role="none" type="file" name="file" width="120px" id="file">    
-	    <button data-role="none" onclick="testUpload();">测试</button>  
-	</form>
 </body>
 </html>

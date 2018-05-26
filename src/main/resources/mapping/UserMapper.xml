@@ -20,12 +20,18 @@
 		insert into user (user_name, password, age) values (#{user_name}, #{password}, #{age})
 	</insert>
 	
-	<insert id="excelAddUser" parameterType="List">
+	<insert id="excelAddUser" parameterType="java.util.List">
 		insert into user (user_name, password, age)values
-	    	<foreach item="listUser" index="index" collection="list" open="(" separator="," close=")"> 
-	    	  (#{listUser.user_name}, #{listUser.password}, #{listUser.age})
+	    	<!-- <foreach item="listUser" index="index" collection="list" open="(" separator="," close=")">  -->
+	    	<foreach item="listUser" index="index" collection="list"  separator="," > 
+	    	 ( #{listUser.user_name}, #{listUser.password}, #{listUser.age} )
 	        </foreach>
 	</insert>
+	<!-- 加了 open="("  close=")" 的sql -->
+	<!-- insert into user (user_name, password, age)values ( (?,?,?) , (?,?,?) , (?,?,?) ) -->
+	<!-- 没加  open="("  close=")" 的sql -->
+	<!-- insert into user (user_name, password, age)values  (?,?,?) , (?,?,?) , (?,?,?)  -->
+	
 	
 	<insert id="insertUserMoney">
 		insert into user_money (user_id, money, pay) values (#{user_id}, #{money}, #{pay})

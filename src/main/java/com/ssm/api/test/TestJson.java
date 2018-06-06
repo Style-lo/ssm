@@ -29,7 +29,26 @@ public class TestJson {
 			char charAt2 = chars.charAt((int)(Math.random() * 26));
 		}*/
 //		s1();
-		s2();
+		TestJson ts = new TestJson();
+		ts.s4();
+	}
+	int ssString;
+	public void s4(){
+		String ssString;
+		String q;
+		Double q1;
+		System.out.println(this.ssString);
+		int [] s=new int[5];
+		String [] s1=new String[5];
+		System.out.println(s[4]);
+		System.out.println(s1[4]);
+		/*for(int i=0;i<10;i++){
+			for(int a=0;a<10;a++){
+				System.out.println(a+"a");
+			}
+			System.out.println(i+"i");
+			break ;
+		}*/
 	}
 	public static void s3(){
 		JSONObject jsonObject = new JSONObject();

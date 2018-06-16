@@ -37,9 +37,9 @@ public class UserController {
 	
 	@RequestMapping(value="getUserId",method={(RequestMethod.GET),(RequestMethod.POST)})
 	public Object getUserId(@RequestParam Integer id){
+		
+		System.out.println("controller中-------");
 		User userId = userService.getUserId(id);
-		System.out.println(userId.isBool()+"==========");
-		System.out.println(userId.getUser_name());
 		return userId.getUser_name();
 		
 	}

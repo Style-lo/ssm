@@ -3,23 +3,23 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
     xmlns:context="http://www.springframework.org/schema/context"  xmlns:tx="http://www.springframework.org/schema/tx"
     xmlns:mvc="http://www.springframework.org/schema/mvc"  
-    xmlns:task="http://www.springframework.org/schema/task" 
     xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:task="http://www.springframework.org/schema/task" 
     xsi:schemaLocation="http://www.springframework.org/schema/beans    
                         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd    
                         http://www.springframework.org/schema/context    
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd    
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                        http://www.springframework.org/schema/aop 
+           				http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
                         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-                        http://www.springframework.org/schema/aop
-        				http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context 
                         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">  
  
  
      <!-- 引入redis属性配置文件 -->
     <import resource="classpath:/redis-context.xml"/>
-    
+
     
     <!-- 数据源定义 -->    
 <!--     <bean id="propertyConfigurer"    
@@ -53,8 +53,7 @@
 	<!-- swagger使用 -->
 	<mvc:default-servlet-handler />
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->  
-    <bean id="mappingJacksonHttpMessageConverter"  
-        class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
+    <bean id="mappingJacksonHttpMessageConverter"  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
         <property name="supportedMediaTypes">  
             <list>  
                 <value>text/html;charset=UTF-8</value>  
@@ -126,11 +125,8 @@
 
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-    
-    <!-- 开启支持@AspectJ风格的切面声明 -->
-    <aop:aspectj-autoproxy/>
-    
-    
+       	<!-- 启动@aspectj的自动代理支持-->
+    <aop:aspectj-autoproxy />
     
      <!-- MyBatis配置 -->
    <!--  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

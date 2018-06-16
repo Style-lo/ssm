@@ -1,13 +1,10 @@
 package com.ssm.api.extension;
 
-import javax.net.ssl.HandshakeCompletedListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.ssm.api.bean.request.User;
 
 public class Myinter implements HandlerInterceptor{
 

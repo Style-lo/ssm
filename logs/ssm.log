@@ -5779,3 +5779,14 @@ Caused by: java.io.FileNotFoundException: class path resource [cache/redis-conte
 	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:158)
 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:329)
 	... 56 more
+[INFO] [2018-06-07 16:20:16][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ [INFO] [2018-06-07 16:21:23][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ [INFO] [2018-06-07 16:25:30][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ [INFO] [2018-06-07 16:26:03][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ [INFO] [2018-06-07 16:27:48][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ [INFO] [2018-06-07 16:28:17][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ [INFO] [2018-06-07 17:33:09][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ [INFO] [2018-06-07 17:33:55][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ [INFO] [2018-06-07 17:34:37][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ [INFO] [2018-06-07 18:18:34][org.hibernate.validator.internal.util.Version]HV000001: Hibernate Validator 5.0.2.Final
+ 

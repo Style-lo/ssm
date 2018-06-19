@@ -2,6 +2,7 @@ package com.ssm.api.bean.request;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,5 +19,7 @@ public class User {
 	private String password;
 	private int age;
 	private boolean bool;
+	@Transient
+	private double test;
 	
 }

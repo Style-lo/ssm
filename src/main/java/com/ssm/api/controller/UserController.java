@@ -12,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +43,18 @@ public class UserController {
 		User userId = userService.getUserId(id);
 		return userId.getUser_name();
 		
+	}
+	@RequestMapping(value="test",method={(RequestMethod.GET),(RequestMethod.POST)})
+	public Object test(@RequestParam double id){
+		System.out.println("controller中-------"+id);
+		return id;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="test1",method={(RequestMethod.GET),(RequestMethod.POST)})
+	public Object test1(@RequestBody(required=false) User user){
+		System.out.println("controller中-------"+user.getTest());
+		return Double.valueOf(user.getTest());
 	}
 	@RequestMapping(value="stateGetUser",method={(RequestMethod.GET),(RequestMethod.POST)})
 	public Object stateGetUser(@RequestParam String type,@RequestParam int state){

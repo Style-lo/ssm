@@ -44,6 +44,7 @@ public class UserController {
 		return userId.getUser_name();
 		
 	}
+	@ResponseBody
 	@RequestMapping(value="test",method={(RequestMethod.GET),(RequestMethod.POST)})
 	public Object test(@RequestParam double id){
 		System.out.println("controller中-------"+id);

@@ -2,7 +2,8 @@ package com.ssm.api.dao;
 
 import java.util.List;
 
-import com.github.abel533.mapper.Mapper;
+import tk.mybatis.mapper.common.Mapper;
+
 import com.ssm.api.bean.request.User;
 //@Repository("testMapperDao")
 public interface TestMapperDao extends Mapper<User>{
@@ -15,7 +16,7 @@ public interface TestMapperDao extends Mapper<User>{
 	//根据主键进行查询,必须保证结果唯一
 	//单个字段做主键时,可以直接写主键的值
 	//联合主键时,key可以是实体类,也可以是Map
-	User selectByPrimaryKey(Object key);
+//	User selectByPrimaryKey(Object key);
 
 	//插入一条数据
 	//支持Oracle序列,UUID,类似Mysql的INDENTITY自动增长(自动回写)

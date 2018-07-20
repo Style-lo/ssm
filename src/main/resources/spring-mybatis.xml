@@ -79,9 +79,9 @@
         
     </bean>  
     <!-- 配置扫描包，加载mapper代理对象 -->  
- 	 <!-- <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">  
+ 	 <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">  
 		<property name="basePackage" value="com.ssm.api.dao" />  
-	 </bean> -->
+	 </bean>
 	 
 	 
 
